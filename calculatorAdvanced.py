@@ -17,9 +17,18 @@ if not os.path.exists(e):
 #ادامه اسکریپت
 print('Continuing Scripts')
 
-#! دریافت لیستی از محتویات فولدر کاربر
+# دریافت لیستی از محتویات فولدر کاربر
 dir_list = os.listdir(e)[1:]
 
+#Find unigue extensions 
 files_dict = {dir_list[i]: 0 for i in range(len(dir_list))}
 extensions = [dir_list[i].split('.')[1] for i in range(len(dir_list))]
 files_set = list(set(extensions))
+files_dict_unique = {files_set[i]: 0 for i in range(len(files_set))}
+
+#محاسبه تعداد خطوط هر فایل
+for k in files_dict:
+    with open(e + os.sep + k, mode='r') as r:
+        read = r.readlines()
+    files_dict[k] = len(read)
+
