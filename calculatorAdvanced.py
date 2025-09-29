@@ -32,3 +32,18 @@ for k in files_dict:
         read = r.readlines()
     files_dict[k] = len(read)
 
+#اختصاص دادن مفدار هر پسوند به کلید آن ها در دیکشنری
+for k in files_dict:
+    exp = k.split(".")[1]
+    files_dict_unique[exp] += files_dict[k]
+total = sum(files_dict.values())
+
+sum_div_total_dict = {}
+for k in files_dict_unique:
+    sum_div_total_dict[k] = files_dict_unique[k] / total
+
+extensions_percent = {k: sum_div_total_dict[k] * 100 for k in sum_div_total_dict}
+
+print('Calculations were done.')
+for k,v in extensions_percent.items():
+    print('{} files is: {}%'.format(k,round(v, 2)))
